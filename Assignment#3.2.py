@@ -1,1 +1,0 @@
-#2. Artificial turtle graphics
