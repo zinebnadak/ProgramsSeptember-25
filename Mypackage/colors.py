@@ -2,3 +2,8 @@
 
 def favorite_color():
     return "Blue"
+
+def least_fav():
+    return "black"
+
+kökslista = ["blåbär", "fisk", "tomat"]
