@@ -96,14 +96,13 @@ while True:  # Main game loop to allow multiple rounds
     player_points = []
     computer_points = []
 
-
-    while True:  # Loop that lets  player play until  stop or bust, and calculate score
+    while True:  # Loop that lets player play until stop or bust, and calculate score
         card = get_card()  # get the card
         rank, suit = card  # card is a tuple (rank, suit), extract these before using them.
         player_points.append(get_card_value(rank))  # get the points
         print(f"You drew: {card_name(rank)} {suit} and have {sum(player_points)} points")  # Show sum of player points
 
-        if sum(player_points) > 21:  # if player get  over 21 lose
+        if sum(player_points) > 21:  # if player gets over 21, lose
             print("You busted!")
             break
 
@@ -111,20 +110,21 @@ while True:  # Main game loop to allow multiple rounds
         if answer != "y":
             break
 
-    if sum(player_points) <= 21:  # if player stays under 21 computer gets another turn
-        print("\nComputers turn:")
-        while sum(computer_points) < 17:
-            card = get_card()
-            rank, suit = card
-            computer_points.append(get_card_value(rank))
-            print(f"Computer drew: {card_name(rank)} {suit} and has {sum(computer_points)} points")
+    if sum(player_points) <= 21:  # if player stays under 21 computer draws one card
+        print("\nComputer's turn:")
+        card = get_card()
+        rank, suit = card
+        computer_points.append(get_card_value(rank))
+        print(f"Computer drew: {card_name(rank)} {suit} and has {sum(computer_points)} points")
 
     # determine winner
-    if sum(computer_points) > 21:  # if computer gets over 21 player wins
-        print("Computer busted! You win! 🎉")
-    elif sum(computer_points) > sum(player_points):     # checks this "elif" if computer score less than 21, and computer has higher score than player (still under 21)
+    if sum(player_points) > 21:  # if player busts, computer wins
         print("Computer wins!")
-    elif sum(computer_points) == sum(player_points):
+    elif sum(computer_points) > 21:  # if computer busts, player wins
+        print("Computer busted! You win! 🎉")
+    elif sum(computer_points) > sum(player_points):  # if computer higher (and under 21), computer wins
+        print("Computer wins!")
+    elif sum(computer_points) == sum(player_points):  # tie goes to computer
         print("Computer wins! (Tie)")
     else:
         print("You won!")
