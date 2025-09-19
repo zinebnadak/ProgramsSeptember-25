@@ -2,10 +2,6 @@
 # IMPORTANT: “Run main.py as a module inside the Mypackage package,” so the relative imports (.filename) like from .greetings are valid.
 
 
-from .greetings import say_hello, say_goodbye, welcome_message  #use dot befole file name, and leave .py
-from .animals import fav_animal, list_of_animals, is_mammal
-from .colors import favorite_color
-
 #using a greeting
 print (say_hello("Zineb"))
 

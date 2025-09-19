@@ -11,5 +11,5 @@ def is_mammal (animal):
     return animal in mammals
 
 if __name__== "__main__":
-    print(list_of_animals())    # This runs only when the file is executed directly
+    print(list_of_animals())    # This runs only when the file is executed directly, if imported everything not inside the if __name__ == "__main__" block does run
 
