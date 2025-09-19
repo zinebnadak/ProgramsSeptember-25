@@ -134,6 +134,7 @@ print (f"Average of tuple: {average(my_tuple)}")
 # Shuffling the deck randomly
 # Drawing (removing) the top card from the deck
 # Displaying a card’s suit and rank in readable form
+
 import random
 
 def new():          #creates a new, shuffeled play of 52 cards represented as tuples (suit, rank).
@@ -145,24 +146,21 @@ def new():          #creates a new, shuffeled play of 52 cards represented as tu
     return play
 
 def give(play):     #give the top card in play of cards
-    if len(play) > 0:
-        return play.pop()
+    if len(play) > 0:       #if there are still cards in deck
+        return play.pop()   #return play and remove last item from list and returns it eg. shows it simultaniouly
     else:
-        return None     ## Return None if the deck is empty
+        return None     # Return None if the deck is empty
 
 color = ("♣️", "♦️", "♥️", "♠️")
-rank =("E","2","3","4","5","6","7","8","9","10","kn","D","K")
+rank =("E","2","3","4","5","6","7","8","9","10","J","Q","K")
 
-def show(c,last="\n"):      #writes out card "k" in readable format
-    f, v = c                #This unpacks the tuple, f is suit index (1–4), v is rank index (1–13), c is a card tuple
-    print(color[f-1], rank[v-1], end=last)      #Suits are stored in the color list, Ranks are stored in the rank list. Since Python uses 0-based indexing, we subtract 1. f = 1 → color[0] → gives the first suit (e.g., "♣")
+def show(c,last="\n"):      #writes out card "c" in readable format. controls how the print ends. By default, it ends with a newline
+    s, r = c                #Unpack tuple c suit index (1–4), rank index (1–13), c is a card tuple
+    print(color[s-1], rank[r-1], end=last)      #Suits are stored in the color list, Ranks are stored in the rank list. Since Python uses 0-based indexing, we subtract 1. f = 1 → color[0] → gives the first suit (e.g., "♣")
 
 # Create a new shuffled deck
 play = new()
-
 # Draw the top card
 card = give(play)
-
 # Show the drawn card
 show(card)
-
