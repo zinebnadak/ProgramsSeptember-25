@@ -109,6 +109,4 @@ for i in answer:
 else:
     print("Number is OK!")
 
-#10 Write a program
-# use an assert-statement to control errors!
-.
+
