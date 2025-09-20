@@ -109,4 +109,70 @@ for i in answer:
 else:
     print("Number is OK!")
 
+#9 Write a function that checks if leap year or not and that only accepts
+# input year from 1754 and up
+# use an assert-statement to control this
+# leap year is a year that
+# leap year is a year that is divisible by 4 but not by 100, unless it's also divisible by 400
 
+year = int(input("Enter a year: "))
+
+def leap_year(year):
+    assert year >= 1754, ("Too early year", year)
+    return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
+
+print(leap_year(year))      #will give you boolean answer
+
+#10 Write a function that controls with a variable "user_input"
+# that text is a mail-adress
+#There needs to be at least a dot after @ sign
+# use a raise statement for error handling so returns True or False for valid/invalid email
+
+user_input = input("Enter email: ")
+
+def is_not_email(user_input):
+    if "@" not in user_input:
+        raise ValueError('Missing "@" in the email adress')
+
+    at_index = user_input.index("@")           #This line finds the position (index) of the @ symbol in the string user_input
+    if "." not in user_input [at_index:]:        #from index of "@" and forward
+        raise ValueError ('Missing "." after the "@" in the email adress!')
+
+    return ("Valid email")      #check each if statement independently before returning...
+
+    # No error means it's a valid basic email format
+
+email = is_not_email(user_input)
+print (email)
+
+
+# 11 A recursive function can use a lot of memory, since each new recursive call creates its own copy of local variables and parameters.
+# If the memory runs out, an error message of the type RecursionError is generated.
+# Test the recursive function nfak and investigate how large values of n you can give as arguments before this happens.
+
+def nfak(
+        n):  # fakulty of n
+    if n < 0:
+        return None
+    elif n == 0:
+        return 1
+    else:
+        return n * nfak(n - 1)
+
+    # Write code that:
+
+
+# Calls nfak with increasing values of n.
+# Catches RecursionError when it happens.
+# Prints the largest n that works without error
+
+max_n = 0
+
+try:
+    for i in range(1, 2000):        # Start with a big number and go down to find the max safe n , Or start small and increase - up to you
+        result = nfak(i)
+        max_n = i
+except RecursionError:
+    print(f"RecursionError at n = {i}")
+
+print(f"Largest n for nfak without RecursionError is: {max_n}")
