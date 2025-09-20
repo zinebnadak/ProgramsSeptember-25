@@ -215,12 +215,12 @@ def give(play):     #give the top card in play of cards
     else:
         return None     # Return None if the deck is empty
 
-color = ("♣️", "♦️", "♥️", "♠️")
+suit = ("♣️", "♦️", "♥️", "♠️")
 rank =("E","2","3","4","5","6","7","8","9","10","J","Q","K")
 
 def show(c,last="\n"):      #writes out card "c" in readable format. controls how the print ends. By default, it ends with a newline
     s, r = c                #Unpack tuple c suit index (1–4), rank index (1–13), c is a card tuple
-    print(color[s-1], rank[r-1], end=last)      #Suits are stored in the color list, Ranks are stored in the rank list. Since Python uses 0-based indexing, we subtract 1. f = 1 → color[0] → gives the first suit (e.g., "♣")
+    print(suit[s-1], rank[r-1], end=last)      #Suits are stored in the color list, Ranks are stored in the rank list. Since Python uses 0-based indexing, we subtract 1. f = 1 → color[0] → gives the first suit (e.g., "♣")
 
 #Updated game!
 def comp(card_1, card_2):

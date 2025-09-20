@@ -42,16 +42,16 @@ main()
 try:
     num = int(input("Enter a number: "))
     result = 10 / num
-except ValueError:
+except ValueError:          #every except block is checked independently
     print("That's not a valid number!")
 except ZeroDivisionError:
     print("Cannot divide by zero!")
-else:
-    print(f"Result is {result}")
+else:                                       #Runs only if no exception was raised in the try block.
+    print(f"Result is {result}")            #Runs always, whether or not an exception was raised or caught.
 finally:
     print("Execution finished.")
 
-#5 catch all exceptions using a bare except or by catching the base exception class Exception and adding it at bottom.
+#5 catch all exceptions, use a base class "Exception as *variablename" ,and add the type of the exception adding it at bottom.
 try:
     # Code that might raise any exception
     risky_code()
@@ -70,3 +70,44 @@ while True:
         print("That's not a valid number, try again.")
 
 print(f"You entered: {num}")
+
+
+#6 Let user write a number, and check if it is a number or not.
+# Use bool-type for this, not pythons built in .isdigit
+
+answer = input("Write a number: ")
+
+ok = True
+for i in answer:
+    if i < "0" or i > "9":      # checking if the input is numeric. If any character is not between "0" and "9", it sets ok = False. We can use numbers as strings bcs they follow same order in ASCII numbering, so 1 is greater than 0 too...etc
+        ok = False
+        break
+
+if ok:
+    print("Number is OK")
+else:
+    print("Not a number!")
+
+#7 Let user write a number, and check every item independently
+answer = input("Write a number: ")
+
+for i in answer:
+    if "0" <= i <= "9":
+        print ("Number is OK!")
+    else:
+        print("Not a number!")
+
+
+#8 Why do i need to make it complicated with variable "ok" why not just add break-statement, else-part and if-statement in first version of program
+# like this:
+answer = input("Write a number: ")
+
+for i in answer:
+    if "0" <= i <= "9":
+        print ("Not a number!")
+        break
+else:
+    print("Number is OK!")
+
+#10 Write a program
+# use an assert-statement to control errors!
