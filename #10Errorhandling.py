@@ -178,4 +178,4 @@ except RecursionError:
 print(f"Largest n for nfak without RecursionError is: {max_n}")
 
 
-#You can solve a problem either with an iterative or recursive approah 
+#You can solve a problem either with an iterative or recursive approah
