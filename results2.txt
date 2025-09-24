@@ -1,0 +1,4 @@
+Alice Smith 10 20 25
+Bob Johnson 15 10 5
+Clara Lee 30 25 10
+David Park 5 10 15
