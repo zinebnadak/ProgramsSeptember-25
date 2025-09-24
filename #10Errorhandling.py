@@ -104,10 +104,10 @@ answer = input("Write a number: ")
 
 for i in answer:
     if "0" <= i <= "9":
-        print ("Not a number!")
+        print ("Number is OK!")
         break
 else:
-    print("Number is OK!")
+    print("Not a number!")
 
 #9 Write a function that checks if leap year or not and that only accepts
 # input year from 1754 and up
@@ -150,8 +150,7 @@ print (email)
 # If the memory runs out, an error message of the type RecursionError is generated.
 # Test the recursive function nfak and investigate how large values of n you can give as arguments before this happens.
 
-def nfak(
-        n):  # fakulty of n
+def nfak(n):  # fakulty of n
     if n < 0:
         return None
     elif n == 0:

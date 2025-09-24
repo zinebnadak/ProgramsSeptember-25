@@ -26,4 +26,42 @@ print(f"{r} rows and {c} characters copied to new file {new_file}")
 file_1.close()
 file_2.close()                  #Closes both files to free up system resources
 
+#3 Write a program that reads in a number of names from the keyboard and saves the entered names into a text file called personer.txt.
+# In the text file, there should be one name on each line.
+# If the file with that name already exists, it should not be overwritten; instead, the new names should be added at the end of the file.
+# Run the program twice and add some names each time.
+# Before you run the program the first time, make sure that no file named personer.txt exists.
+# After each run, you can use a text editor to see what is in the file personer.txt.
+print("Enter names one at a time. Press Enter without typing a name to exit!: ")
 
+with open("persons.txt","a") as f:      #this opens (or creates) a file named personer.txt, If it does exist, the behavior depends on the mode you use next, "a" stands for append. This mode adds new content to the end of the file. "as f" assigns that file object to the variable f
+    while True:
+        name = input("Enter name: ")
+        if name == "":
+            break   #Stop when input is empty
+        f.write(name+"\n")
+
+print("Names are saved to 'persons.txt'.")
+
+
+
+#4 Write a program that reads in a text file containing a Python program.
+# The program should ask for the file’s name.
+# The program should examine which lines in the file contain comments.
+# For simplicity, assume that the only comments are those of the type starting with #.
+# The program should then print out what percentage of the lines in the file contain comments.
+name = input("Enter filename: ")
+
+comments = 0
+total_lines = 0
+with open (name,"r")as f:    #reads file
+    for row in f:             #for every row
+        total_lines = total_lines+1
+        if "#" in row:        # not if row == "#". This checks if the entire line is exactly "#", which is almost never true.
+            comments = comments +1
+
+comment_percentage = (comments/total_lines) *100
+
+print (f"File {name} has {total_lines} lines, and {comments} comments {comment_percentage} % are comments.")
+
+#5

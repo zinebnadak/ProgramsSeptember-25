@@ -219,7 +219,7 @@ suit = ("♣️", "♦️", "♥️", "♠️")
 rank =("E","2","3","4","5","6","7","8","9","10","J","Q","K")
 
 def show(c,last="\n"):      #writes out card "c" in readable format. controls how the print ends. By default, it ends with a newline
-    s, r = c                #Unpack tuple c suit index (1–4), rank index (1–13), c is a card tuple
+    s, r = c                #Unpack tuple c suit index (1–4), rank index (1–13), c is a card tuple where s =1 and r =1
     print(suit[s-1], rank[r-1], end=last)      #Suits are stored in the color list, Ranks are stored in the rank list. Since Python uses 0-based indexing, we subtract 1. f = 1 → color[0] → gives the first suit (e.g., "♣")
 
 #Updated game!
@@ -230,10 +230,10 @@ def comp(card_1, card_2):
     rank_1_value = 14 if rank_1 == 1 else rank_1        #treat Ace (rank 1) as 14 for comparison
     rank_2_value = 14 if rank_2 == 1 else rank_2
 
-    if suit_1 > suit_2:         #compare suits first, returning value (1, -1, or 0) to use them later easier
-        return 1                # card1 is higher
+    if suit_1 > suit_2:         #compare suits first, standard way to represent comparison results returning value (1, -1, or 0) to use them later easier
+        return 1                # 1 means first item (card 1) is higher
     elif suit_1 < suit_2:
-        return -1               # card2 is higher
+        return -1               # -1 means second item (card2) is higher
     else:                       # if suits are equal, compare rank values
         if rank_1_value > rank_2_value:
             return 1
@@ -259,8 +259,8 @@ while True:
     card_1 = give(play) # Draw the top card
     card_2 = give(play)
 
-    print("You drew: ", end="") #show it this way, bcs show(...) prints the card, but returns None
-    show(card_1, last=" and ") #so if you try to print the function show car you´ll print None
+    print("You drew: ", end="") #keep cards on same line, show it this way, bcs show(...) prints the card, but returns None
+    show(card_1, last=" and ") #last= to keep the last function used end="" bcs end is not a parameter of your function show() — it's a parameter of print(), and need to use print before bcs  if you try to print the function show card you´ll print None
     show(card_2)
 
     result = comp(card_1, card_2)
