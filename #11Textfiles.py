@@ -114,4 +114,3 @@ with open (file_results, "r")as file_1, open (new_file_name,"w") as file_2:
 
 print(f"Students who passed class is now added to {new_file_name}.")
 
-#7

@@ -1,0 +1,10 @@
+alice 30 20 15
+bob 10 25 40 5
+charlie 60 10
+diana 20 20 20 20
+
+# Each row has:
+# - A username (string)
+# - Followed by login times in minutes (integers) separated by spaces
+
+
