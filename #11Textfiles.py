@@ -140,6 +140,82 @@ with open(filename, "r") as f:
 
 print(f"User with longest total login time: {longest_user} ({longest_time} minutes)")       # After processing all rows, print the user with the longest total login time
 
-#8 Write a verion of a the previous program that can edit the file with the pupils name and points (results.txt).
-# Program can add new pupils in file and change points for a pupil who is already in file. The user will terminate with Ctrl+C
-page 216
+# 8 Write a verion of a the previous program that can edit the file with the pupils names and points (eg. results.txt file).
+# Program can add new pupils in file and change points for a pupil who is already in file.
+# The user will terminate with Ctrl+C
+
+# Function to extract the name from a row (assumes name is the first word)
+def name(row):
+    parts = row.strip().split()
+    if len(parts) >= 2:
+        return f"{parts[0]} {parts[1]}"  # e.g., "Alice Andersson"
+    return ""
+
+try:
+    print("Terminate with Ctrl+C")  # Exits the program and saves file when Ctrl+C is pressed
+    f_name = input("File with results?: ")  # e.g., results.txt
+
+    # Open and read the file — load all lines into a list
+    with open(f_name, "r") as f:
+        rows = f.readlines()  # 'rows' is a list of all lines in the file
+
+    while True:
+        # Input a new row (e.g. "Alice Andersson 12") and add newline character
+        new_row = input(">") + "\n"
+
+        # Extract full name from the input
+        new_name = name(new_row)
+
+        if new_name == "":
+            print("Wrong row (must include first and last name)")  # Invalid input
+            continue  # Skip to next input
+
+        inputted = False
+
+        # Go through the list and look for a matching full name
+        for i in range(len(rows)):
+            name_i = name(rows[i])  # Extract name from existing row
+
+            if new_name == name_i:
+                # If the name matches, update the row in the list
+                rows[i] = new_row
+                inputted = True
+                break  # Stop looking
+
+        if not inputted:
+            # If the name wasn't found, append the new row to the list
+            rows.append(new_row)
+
+# When the user presses Ctrl+C, write the updated list back to the file
+except KeyboardInterrupt:
+    print("\nSaving changes and exiting...")
+
+    # Open the file in write mode and write all rows from the list
+    with open(f_name, "w") as f:
+        for row in rows:
+            f.write(row)
+
+
+#OBS! Does not work maybe bcs Mac?
+
+#9 Now write a second verion to edit in the file, but this time use a temporary file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
