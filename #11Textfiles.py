@@ -142,76 +142,151 @@ print(f"User with longest total login time: {longest_user} ({longest_time} minut
 
 # 8 Write a verion of a the previous program that can edit the file with the pupils names and points (eg. results.txt file).
 # Program can add new pupils in file and change points for a pupil who is already in file.
+#To use this program user will enter new names or updates: like this: Alice Andersson 15
 # The user will terminate with Ctrl+C
 
-# Function to extract the name from a row (assumes name is the first word)
-def name(row):
-    parts = row.strip().split()
-    if len(parts) >= 2:
-        return f"{parts[0]} {parts[1]}"  # e.g., "Alice Andersson"
-    return ""
+#Function that takes a line in the file, extracts the name (w/o number), returns the name in lowercase
+def get_name(row):              # get_name that takes one argument: row, which is expected to be a line from the file (e.g., "Alice Andersson 12")
+    word = row.strip().split()  # cleans and splits a string into a list of individual words, .strip() removes any space characters, tab and newline characters - .split() splits the string by spaces (default separator) into a list of words
+    names = [e for e in word if not e.isdecimal()]      # list comprehension. This creates a list of words that are not numbers. It goes through each element e in the list word and keeps only the elements that are not numbers (i.e., not digits). .isdecimal() returns True if the string only contains numbers (like "12")
+    name = " ".join(names)                              # This joins all the elements in the names list back into a single string, with a space " " between them.
+    return name.lower()                                 # This converts the final name to lowercase, so that the name comparisons are not case-sensitive
 
 try:
-    print("Terminate with Ctrl+C")  # Exits the program and saves file when Ctrl+C is pressed
-    f_name = input("File with results?: ")  # e.g., results.txt
+    # Step 1: Ask for the file name and load all rows into a list
+    print("Terminate with Ctrl+C")
+    file_name = input("File with results?: ")
 
-    # Open and read the file — load all lines into a list
-    with open(f_name, "r") as f:
-        rows = f.readlines()  # 'rows' is a list of all lines in the file
+    with open(file_name, "r") as f:
+        rows = f.readlines()  # This line right here loads the file into a list of strings. WHY? Lists are easy to work with (loops, indexes, append, string functions). Read the whole file into the list of strings called 'rows'. You're simply reading all the lines into a list of strings.
 
-    while True:
-        # Input a new row (e.g. "Alice Andersson 12") and add newline character
-        new_row = input(">") + "\n"
-
-        # Extract full name from the input
-        new_name = name(new_row)
+    # Step 2: Start input loop
+    while True:         # as long as user doesn't type Ctrl + C
+        new_row = input("> ") + "\n"  # Read user input and add newline character
+        new_name = get_name(new_row)  # Extract name from the input
 
         if new_name == "":
-            print("Wrong row (must include first and last name)")  # Invalid input
-            continue  # Skip to next input
+            print("Invalid line! Must include first and last name.")
+            continue  # Skip invalid input
 
-        inputted = False
+        inserted = False  # This variable acts as a flag to help us keep track of whether the user's name already exists in the file (or rather, in the list of lines from the file). Boolean variable named 'inserted' and sets it to False.
 
-        # Go through the list and look for a matching full name
-        for i in range(len(rows)):
-            name_i = name(rows[i])  # Extract name from existing row
+        # Loop through the lines to find a matching name
+        for i in range(0, len(rows)):
+            existing_name = get_name(rows[i])
+            if new_name == existing_name:
+                rows[i] = new_row  # Replace the old line with the new one
+                inserted = True
+                break  # Stop searching
 
-            if new_name == name_i:
-                # If the name matches, update the row in the list
-                rows[i] = new_row
-                inputted = True
-                break  # Stop looking
+        if not inserted:
+            rows.append(new_row)  # Name wasn't found, so add it at the end of the file
 
-        if not inputted:
-            # If the name wasn't found, append the new row to the list
-            rows.append(new_row)
+# Step 3: Save file when the user presses Ctrl+C
+except KeyboardInterrupt:       # Pressing Ctrl + C while a Python program is running sends a KeyboardInterrupt exception. f you don’t catch it, the program just crashes and exits immediately. By using except KeyboardInterrupt, you're saying: → "If the user presses Ctrl + C, don’t crash — do this instead."
+    print("\nSaving and exiting...")
 
-# When the user presses Ctrl+C, write the updated list back to the file
-except KeyboardInterrupt:
-    print("\nSaving changes and exiting...")
-
-    # Open the file in write mode and write all rows from the list
-    with open(f_name, "w") as f:
-        for row in rows:
-            f.write(row)
+    with open(file_name, "w") as f:                 #opens the file in write mode ("w"), which means: It will overwrite the file completely. You're preparing to write the updated list (rows) into the file. with is used so the file automatically closes afterward
+        for row in rows:                            #This loop goes through each element (row) in the list of lines (rows) you've been editing during the program.
+            f.write(row)                            #This writes each row back to the file
 
 
 #OBS! Does not work maybe bcs Mac?
 
-#9 Now write a second verion to edit in the file, but this time use a temporary file
+#9 Now write a second version to edit in the file, but this time use a temporary file
+#This method is safer than modifying the file in-place because it ensures: The original file isn't corrupted if the program crashes halfway. You don't lose data if something goes wrong during editing.
+import tempfile         # Import the tempfile module to create temporary files safely
+
+# same as before
+def get_name(row):              # get_name that takes one argument: row, which is expected to be a line from the file (e.g., "Alice Andersson 12")
+    word = row.strip().split()  # cleans and splits a string into a list of individual words, .strip() removes any space characters, tab and newline characters - .split() splits the string by spaces (default separator) into a list of words
+    names = [e for e in word if not e.isdecimal()]      # list comprehension. This creates a list of words that are not numbers. It goes through each element e in the list word and keeps only the elements that are not numbers (i.e., not digits). .isdecimal() returns True if the string only contains numbers (like "12")
+    name = " ".join(names)                              # This joins all the elements in the names list back into a single string, with a space " " between them.
+    return name.lower()                                 # This converts the final name to lowercase, so that the name comparisons are not case-sensitive
+
+try:
+    print("Terminate program with Ctrl + C")
+    f_name = input("File with results?: ")
+
+    # Use valid mode "w+" for text read/write temporary file
+    with tempfile.TemporaryFile("w+t") as temp:      # read more about these combos "w+t" lets you write and read in text mode, "w+" lets you write and read and If the file already exists, it clears (truncates) the file to zero length — so any old content is deleted.  tempfile.TemporaryFile creates a temporary file "temp" which is automatically deleted when it is closed, to read and write into = text mode
+
+        while True:                                      # Loop forever until user presses Ctrl+C
+            with open(f_name, "r") as f:                 # Open original file in read mode to scan existing lines
+                new_row = input("> ") + "\n"             # Read new input line and add newline
+                new_name = get_name(new_row)             # Extract name from the new input
+
+                if new_name == "":                        # Check if name is empty (invalid input)
+                    print("Error in row")                 # Warn user
+                    continue                              # Restart the loop for a new input
+
+                inputted = False                          # Flag to track if the name was found and updated
+
+                for row in f:                             # Go through each existing line in the original file
+                    if get_name(row) == new_name:         # If the name in this line matches the new input's name
+                        temp.write(new_row)                # Write new row instead of old one
+                        inputted = True                   # Mark that we updated this entry
+                    else:
+                        temp.write(row)                   # Otherwise, copy the old line as is
+
+                if not inputted:                          # If the name was not found in the existing file, add it now
+                    temp.write(new_row)                   # Correct variable name: temp, not t
+
+            with open(f_name, "w") as f:                  # Open original file to copy all lines from the temp file and WRITE back into the original file
+                temp.seek(0)                               # Move temp file cursor back to the beginning
+                for row in temp:                           # Read every line in the temporary file
+                    f.write(row)                           # Write each line from temp file to original file
+                temp.seek(0)                               # Move cursor back to start for next iteration
+                temp.truncate(0)                           # Clear temp file content to zero bytes
+
+except KeyboardInterrupt:
+    print("\nSaves and exits program...")  # Message shown when user exits with Ctrl+C
+    exit()  # Exit the program cleanly
 
 
+#10 Write a program that counts how many rows there is in a file .
+# Program will start from commandorow.
+# You can input multiple filenames as arguments.
+# Program will then calculate amount of rows in all files.
+# This is done for one file at a time and you´ll get an separate output for every file
 
+#read multiple command line arguments with sys
+#Loop through each filename passed as an argument
+#For each file, count the lines
+#Print the result for each file with its filename seperated by whitespace
+#to use Save your script, Open a terminal / command prompt, Navigate to the folder, Run the script with file arguments
+# right click on folder to copy path , Check you’re in the right folder type: ls
+#obs! cd changes to the folder where your script is. python3 T.py ... tells the system: “Use Python 3 to run this script.”
+# cd /Users/zineb/Pycharm/September/ProgramsSeptember-25
+# python3 T.py file1.txt file2.txt
+import sys
 
+def count_lines(filename):
+    try:
+        with open(filename, "r") as f:         # read mode (default). You can only read from the file, not write to it
+            return sum(1 for _ in f)           # "_" variable stands for line; we only count lines
+    except FileNotFoundError:
+        print(f'Error: File "{filename}" not found!')
+        return None                             # The function count_lines is supposed to give back the number of lines.
+                                                 # If the file doesn’t exist, there’s no valid number to return.
+                                                 # None is Python’s way of saying “no value” or “nothing here.”
 
+def main():                                     # All the code below (indented) will run when main() is called
+    if len(sys.argv) < 2:                       # sys.argv is a list of all the arguments passed from the command line.
+                                                 # If it’s less than 2, that means only the script name was given, and no filenames were provided.
+        print("Usage: python script.py <file1> <file2> ...")  # If no filenames were given, we tell the user how to use the program correctly.
+        return                                  # This exits the main() function. Useful because if no filenames are given, there’s nothing left to do.
 
+    for filename in sys.argv[1:]:               # sys.argv[1:] means “take everything in the list starting from index 1 onward.”
+                                                 # Index 0 is the script name (script.py), so we skip that.
+                                                 # This loop will go through each filename the user typed in
+        line_count = count_lines(filename)      # Calls the function we wrote earlier. Function opens the file and counts its lines
+        if line_count is not None:              # Checks whether the function gave back a valid number.
+                                                 # If the file didn’t exist, line_count would be None, and we’d skip printing.
+            print(f"{filename}: {line_count} rows")  # If the file was read successfully, print the filename and number of rows
 
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
 
 
 

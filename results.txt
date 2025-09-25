@@ -9,3 +9,6 @@ Sophia Brown 50
 James Lee 78
 Isabella Garcia 33
 Zineb Nadak 100
+Mariam Nadak 60
+^C
+zizo 33
