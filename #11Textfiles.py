@@ -290,6 +290,8 @@ if __name__ == "__main__":
 
 
 
+#11 Write a program that READS a textfile and writes out the textfiles contents In the command window.
+# In the output, all tab characters should be replaced with three spaces.
 
 
 

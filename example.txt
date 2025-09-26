@@ -1,0 +1,7 @@
+#need to use print
+#use tab spaces between words
+#Type your text with actual tabs (press the Tab key between words, don’t type \t)
+
+M.name is  Zineb!
+My insta    is  #@zineb_nadak
+My email    is  zinebnadak@outlook.com
