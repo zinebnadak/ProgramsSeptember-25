@@ -291,7 +291,20 @@ if __name__ == "__main__":
 
 
 #11 Write a program that READS a textfile and writes out the textfiles contents In the command window.
-# In the output, all tab characters should be replaced with three spaces.
+# In the output, all "." characters should be replaced with one space character
+
+def print_modified_file(filename):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:     #If the text file contains special characters (like å, ä, ö in Swedish, or accents in other languages), opening it without specifying the encoding could cause errors or show weird characters.
+            for line in file:
+                modified_line = line.replace(".", " ")  # "." is old, replaced by" " new
+                print(modified_line, end="")
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+
+print_modified_file("example.txt")      # Replace "example.txt" with the name of your text file
+
+# When you have time look why Ctrl C and tab do not work!
 
 
 

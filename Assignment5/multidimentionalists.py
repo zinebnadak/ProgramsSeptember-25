@@ -82,4 +82,5 @@ def main():
         player = 2 if player == 1 else 1
 
 
-def main ():
+if __name__ == "__main__"       #ensures that the game runs when the file is executed directly
+    main()
