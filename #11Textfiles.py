@@ -306,6 +306,54 @@ print_modified_file("example.txt")      # Replace "example.txt" with the name of
 
 # When you have time look why Ctrl C and tab do not work!
 
+#14 Do the same thing as the previous program, but for it so that the textfile changes instead of printing the changed text in window.
+# Tip! read the file into memory using  a list!
+#instead of printing, you need to change the file’s contents so the "." characters are replaced with spaces inside the file itself
+
+def change_modified_file():         #(remove the parameter completely)
+    filename = input("Enter filename you want to change: ")     #Let the function ask for the filename itself
+    try:
+        lines = []  # empty list to input lines
+        with open(filename, "r", encoding="utf-8") as f:
+            for line in f:
+                modified_line = line.replace(".", " ")
+                lines.append(modified_line)         #You don’t need "\n" here anyway, because each line you read from the file already ends with a newline
+
+        with open(filename, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+
+change_modified_file()
 
 
+#13 a textfile contains temperatures that have been measured at 13 o´clock in a specific place during a month.
+# There is a temperature on every row in the file.
+# Write a program that reads in the file and wirtes out the highest measured temp, and the temp average.
+# The user vill input the filename when program is run
 
+def main():     #function for the outputs
+    filename = input ("Enter the filename: ")
+
+    try:
+        with open (filename, "r") as f:
+            temperature = [float(line.strip())for line in f if line.strip()]       # List comprehension: Reads each line from the file one by one. Removes any whitespace around the text, including newline \n. if line.strip() checks that the line isn’t empty after stripping spaces.
+
+        if not temperature:
+            print("The file is empty.")
+            return
+
+        highest_temp = max(temperature)
+        average_temp = sum(temperature) / len(temperature)
+
+        print(f"Highest temperature: {highest_temp:.2f}")
+        print(f"Average temperature: {average_temp:.2f}")
+
+    except FileNotFoundError:       #trying to open a file that doesn’t exist. Python raises a FileNotFoundError → that specific block runs.
+        print("File not found. Please check the filename.")
+    except ValueError:              #if the data is written wierdly
+        print("File contains invalid data. Make sure it only has numbers.")
+
+if __name__ == "__main__":
+    main()

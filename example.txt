@@ -1,7 +1,7 @@
-#need to use print
-#use tab spaces between words
+#do not need to use print
 #Type your text with actual tabs (press the Tab key between words, don’t type \t)
+#program works but not understanding tabs
 
-M.name.is.Zineb!
-My.insta.is.@zineb_nadak
-My.email.is.zinebnadak@outlook.com
+M name is Zineb!
+My insta is @zineb_nadak
+My email is zinebnadak@outlook com
