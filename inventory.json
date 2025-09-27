@@ -1,0 +1,12 @@
+{
+    "A101": {
+        "description": "Laptop",
+        "stock": 5,
+        "price": 799.99
+    },
+    "A102": {
+        "description": "Keyboard",
+        "stock": 30,
+        "price": 40.0
+    }
+}
