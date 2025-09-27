@@ -1,33 +1,32 @@
-#multi- dimentional lists
+#2. Two-dimentional (multi-) list: Chomp
 
-#1 Two-dimentional lists: Chomp
 # initialize(board) → creates a 4x10 board with 'X' and 'O'.
 # print_board(board) → prints the board nicely.
 # get_move(playerNo, board) → gets a valid move from the player.
 # update_board(row, col, board) → updates the board according to Chomp rules.
 # main() → handles alternating turns and detects when the game ends.
 
-def initialize (board:list[list[str]]):         #Initialize a 4x10 board: 'X' in the top-left corner, 'O' everywhere else.
+def initialize(board: list[list[str]]):         # Initialize a 4x10 board: 'X' in the top-left corner, 'O' everywhere else.
     rows = 4
     columns = 10
-    for r in range (rows):
-        row_list =[]
+    for r in range(rows):
+        row_list = []
         for c in range(columns):
             if r == 0 and c == 0:
                 row_list.append("X")            # poisoned candy
             else:
-                row_list.append("0")            # normal candy
+                row_list.append("O")            # normal candy
+        board.append(row_list)                    # Add the row to the board
 
 
-def print_board(board: list[list[str]]):        #Print the current state of the board.
+def print_board(board: list[list[str]]):        # Print the current state of the board.
     print("\n+----------+")
     for row in board:
         print("|" + "".join(row) + "|")
     print("+----------+\n")
 
 
-def get_move(playerNo: int, board: list[list[str]]) -> tuple[int, int]:         #Prompt the player until a valid move is entered.
-
+def get_move(playerNo: int, board: list[list[str]]) -> tuple[int, int]:  # Prompt the player until a valid move is entered.
     while True:
         move = input(f"Spelare {playerNo}: Gör ditt drag! (rad, kolumn): ")
         try:
@@ -49,10 +48,10 @@ def get_move(playerNo: int, board: list[list[str]]) -> tuple[int, int]:         
             print("Redan uppäten!")
             continue
 
-        return row, column
+        return row, col  # corrected from 'column' to 'col'
 
-def update_board(row: int, col: int, board: list[list[str]]):           #Update the board: remove the selected candy and all below/right of it.
 
+def update_board(row: int, col: int, board: list[list[str]]):  # Update the board: remove the selected candy and all below/right of it.
     rows = len(board)
     cols = len(board[0])
     for r in range(row, rows):
@@ -82,5 +81,5 @@ def main():
         player = 2 if player == 1 else 1
 
 
-if __name__ == "__main__"       #ensures that the game runs when the file is executed directly
+if __name__ == "__main__":  # ensures that the game runs when the file is executed directly
     main()

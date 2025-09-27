@@ -1,6 +1,6 @@
 
 
-#1 Build a simulation program for Paf Låttå using the "generate_row" and "check_row" functions from LottoFunctions.py
+#1b. Build a simulation program for Paf Låttå using the "generate_row" and "check_row" functions from LottoFunctions.py
 #This code simulates a lottery system over 104 weeks with 2000 players per week. It tracks weekly payouts, counts how many numbers players got correct, handles jackpot growth, and prints a final summary of wins and losses.
 # treat this file as main to import functions from LottoFunctions
 

@@ -1,4 +1,4 @@
-#one- dimentional lists
+#1a. one- dimentional lists
 
 #1 create "generate_row function" in Python using the random.sample function, which conveniently generates unique random numbers.
 # Then sort the list before returning it.
