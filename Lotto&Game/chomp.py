@@ -16,7 +16,7 @@ def initialize(board: list[list[str]]):         # Initialize a 4x10 board: 'X' i
                 row_list.append("X")            # poisoned candy
             else:
                 row_list.append("O")            # normal candy
-        board.append(row_list)                    # Add the row to the board
+        board.append(row_list)                  # Add the row to the board
 
 
 def print_board(board: list[list[str]]):        # Print the current state of the board.
