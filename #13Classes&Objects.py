@@ -16,3 +16,6 @@ print(type(com1))
 #SO...
 #When you write com1 = Computer, wo parenthesis You’re just saying: “com1 is the class itself.
 #When you write com1 = Computer() The () calls the class constructor. Python creates a new object (instance) of the class
+#.
+
+print("hello")
