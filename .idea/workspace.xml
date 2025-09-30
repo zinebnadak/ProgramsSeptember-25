@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d69cd5f4-d935-44e1-bc81-552ef1bc4af8" name="Changes" comment="29.9.." />
+    <list default="true" id="d69cd5f4-d935-44e1-bc81-552ef1bc4af8" name="Changes" comment="29.9">
+      <change afterPath="$PROJECT_DIR$/BMWM8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/#13Classes&amp;Objects.py" beforeDir="false" afterPath="$PROJECT_DIR$/#13Classes&amp;Objects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,24 +37,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.#10Errorhandling.executor&quot;: &quot;Run&quot;,
-    &quot;Python.#11Textfiles.executor&quot;: &quot;Run&quot;,
-    &quot;Python.LottoFunctions.executor&quot;: &quot;Run&quot;,
-    &quot;Python.LottoSimulation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.LottoSimulations.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Paflottosimulations.executor&quot;: &quot;Run&quot;,
-    &quot;Python.T.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chomp.executor&quot;: &quot;Run&quot;,
-    &quot;Python.example.executor&quot;: &quot;Run&quot;,
-    &quot;Python.inventory.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.#10Errorhandling.executor": "Run",
+    "Python.#11Textfiles.executor": "Run",
+    "Python.#13Classes&Objects.executor": "Run",
+    "Python.BMWM8.executor": "Run",
+    "Python.LottoFunctions.executor": "Run",
+    "Python.LottoSimulation.executor": "Run",
+    "Python.LottoSimulations.executor": "Run",
+    "Python.Paflottosimulations.executor": "Run",
+    "Python.T.executor": "Run",
+    "Python.chomp.executor": "Run",
+    "Python.example.executor": "Run",
+    "Python.inventory.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -213,7 +219,14 @@
       <option name="presentableId" value="LOCAL−00021" />
       <updated>1759126730143</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL−00022" summary="29.9">
+      <option name="closed" value="true" />
+      <created>1759127207491</created>
+      <option name="number" value="LOCAL−00022" />
+      <option name="presentableId" value="LOCAL−00022" />
+      <updated>1759127207491</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +249,7 @@
     <MESSAGE value="27.9" />
     <MESSAGE value="27.9.." />
     <MESSAGE value="29.9.." />
-    <option name="LAST_COMMIT_MESSAGE" value="29.9.." />
+    <MESSAGE value="29.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="29.9" />
   </component>
 </project>
