@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d69cd5f4-d935-44e1-bc81-552ef1bc4af8" name="Changes" comment="29.9">
-      <change afterPath="$PROJECT_DIR$/BMWM8.py" afterDir="false" />
+    <list default="true" id="d69cd5f4-d935-44e1-bc81-552ef1bc4af8" name="Changes" comment="30.9">
+      <change afterPath="$PROJECT_DIR$/Prectangles.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rectangles.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/#13Classes&amp;Objects.py" beforeDir="false" afterPath="$PROJECT_DIR$/#13Classes&amp;Objects.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -47,6 +48,7 @@
     "Python.LottoSimulation.executor": "Run",
     "Python.LottoSimulations.executor": "Run",
     "Python.Paflottosimulations.executor": "Run",
+    "Python.Prectangles.executor": "Run",
     "Python.T.executor": "Run",
     "Python.chomp.executor": "Run",
     "Python.example.executor": "Run",
@@ -226,7 +228,14 @@
       <option name="presentableId" value="LOCAL−00022" />
       <updated>1759127207491</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL−00023" summary="30.9">
+      <option name="closed" value="true" />
+      <created>1759215684514</created>
+      <option name="number" value="LOCAL−00023" />
+      <option name="presentableId" value="LOCAL−00023" />
+      <updated>1759215684514</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -250,6 +259,7 @@
     <MESSAGE value="27.9.." />
     <MESSAGE value="29.9.." />
     <MESSAGE value="29.9" />
-    <option name="LAST_COMMIT_MESSAGE" value="29.9" />
+    <MESSAGE value="30.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="30.9" />
   </component>
 </project>

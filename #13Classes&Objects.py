@@ -1,3 +1,6 @@
+# when going through doc use print() to separate the number you are working on
+
+
 
 #Here, "Computer" is just the blueprint.
 # Object / instance is the actual thing you create from the blueprint.
@@ -102,6 +105,30 @@ print(f"Account owner: {acc_1.accowner}")       #to get only sur/last name: prin
 print(f"Saldo: {acc_1.saldo}")
 print(f"Earned interest: {acc_1.earned_interest}")
 print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #To summurize:
 # acc_1 is a object to Class Bankacc..
@@ -219,3 +246,288 @@ circle1.set_r(7)
 print(f"Circle with center at ({circle1.x}, {circle1.y}) and radius {circle1.radius}. Area: {circle1.area():.2f}. Circumference: {circle1.circ():.2f}")
 
 
+#8 How does Python knows which circle object’s radius to update when you call set_r?
+# How does the method set_r know that it is the radius of circle1 that needs to be changed and not radius of another circle.
+# Like we are only using self.r in distribution sentence....
+
+#Every time you call a method on an object (e.g., circle1.set_r(7)), Python automatically passes that object as the first argument to the method, which by convention is named self.
+#The method set_r knows which circle’s radius to change because the object you call it on (circle1, circle2, etc.) is automatically passed as the self argument.
+# Therefore, self.radius refers specifically to the radius of that particular object, not all circles.
+
+#9 Why know this?
+# We need to know this because it explains how objects keep their own separate data in object-oriented programming.
+# If you didn’t understand that self always refers to the current object, it might look like all Circle objects share one radius, which would make it impossible to have multiple independent circles.
+
+#10 Use the previous programs made to calculate area and circumference of two new circles c1 and c2, let user type in radius
+r1 = float(input("Enter radius of first circle: "))
+r2 = float(input("Enter radius of second circle: "))
+
+#We have an Class called "Circle", rest of the parameters will be defaulted...
+c1 = Circle(radius=r1)
+c2 = Circle (radius=r2)
+
+# Calculate and display results
+#functions area and circ are methods defined inside Circle class
+print(f"Area: {c1.area():.2f}")
+print(f"Circumference: {c1.circ():.2f}")
+
+print(f"Area: {c2.area():.2f}")
+print(f"Circumference: {c2.circ():.2f}")
+
+#11 define a class "Rectangles" that describes rectangles. Add the class into a file amed "rectangle.py"
+# Let the class contain instance variables describing rectangles start-point (upper left corner) , height and lenght
+# And add a method that calculates the area and circumference
+
+#see file Rectangles.py
+# to use in this file type example:
+#from rectangle import Rectangles
+
+#r1 = Rectangles(x=2, y=3, height=4, length=6)
+#print(r1)  # Rectangle at (2, 3) with height 4 and length 6
+#print("Area:", r1.area())
+#print("Circumference:", r1.circumference())
+
+
+#12 Create a new file with class similar to class "Rectangles" named "Prectrangles"
+# but this time so that the instance variables that describe height and lenght are considered private.
+# Add get- and set- methods instead, and setter methods to update the private variables in a controlled way
+# at last test it
+
+#see file Prectangles.py
+from Prectangles import Prectangles
+
+#test
+# Create a rectangle with default values, (you can also Create a rectangle with custom values)
+rectangle_1 = Prectangles()
+print (rectangle_1)
+print("Area:", rectangle_1.area())
+print("Circumference:", rectangle_1.circumference())
+
+# Use setter methods to change height and length
+rectangle_1.set_height(5)
+rectangle_1.set_lenght(8)
+print ("Updated rectangle after using setters:", rectangle_1)
+print ("Area:", rectangle_1.area())
+print ("Circumference:", rectangle_1.circumference())
+
+# Use getter methods to read values
+print("\nUsing getters for r2:")
+print("Height:", rectangle_1.get_height())
+print("Length:", rectangle_1.get_lenght())
+
+
+#13 We can now do the same way as we did with instance variables, on Classvariables.
+# Consider that we in the class "Bankacc" do not want the  interest rate to be able to be negative.
+# we can then rename interestr to _interestr, adding "_"
+# and define the methods set_interestr and get_interestr, these are called class methods
+# Make these changes to Class Bankacc
+
+class Bankacc:
+    _interestr = 0.0        # private class variable (interest rate)
+
+    def __init__(self):
+        self.accowner = None  # None means "not yet assigned"
+        self.saldo = 0
+        self.earned_interest = 0
+
+    @classmethod             # Class method to set interest rate
+    def set_interestr(cls, new_rate):   #cls stands for class (just like self stands for the current object in instance methods).You use cls to access class variables or call other class methods.
+        if new_rate >= 0:  # prevent negative interest
+            cls._interestr = new_rate
+        else:
+            print("Interest rate cannot be negative!")
+
+    @classmethod             # Class method to get interest rate
+    def get_interestr(cls):
+        return cls._interestr
+
+    def apply_interest(self):           # Optional: instance method to apply interest to this account
+        interest = self.saldo * Bankacc._interestr
+        self.earned_interest += interest
+        self.saldo += interest
+        return interest
+
+#14 Now test this by create a new account and set interest to 0.05%
+Bankacc.set_interestr(0.05)     # Set class-level interest rate
+
+acc_1 = Bankacc()               # Create an account
+acc_1.saldo = 1000
+
+acc1.apply_interest()           # Apply interest
+print("Saldo after interest:", acc1.saldo)
+print("Earned interest:", acc1.earned_interest)
+
+
+#15 Now we move on to Classes describing different kind of Houses.
+# All classes are supposed to be subclasses (direct or indirect) to a class "House" that describes houses in all generality.
+# Class house will have instance variables length and width.
+# Use method __str__ to get printout from a House
+# Class house will also have method "quadratical" that examines if lenght and width is equal and method area that calculates the house´s total floor surfice area
+
+class House:
+    def __init__(self,length=0, width=0):        #constructor for a generic house
+    self.length = length
+    self.width = width
+
+    def __str__(self):
+        return f"House with length {self.length} and width {self.width}"
+
+    def quadratical(self):
+        return self.length == self.width
+
+    def area(self):
+        return self.length * self.width
+
+
+
+#16 Now assume we want to describe a multiple-story house.
+# We can define a new class "Multi_story_house" as a subclass (to class "House")
+# In this subclass we want to add an instance variable telling how many floors a house has
+# the subclass should not be indented under class House BTW
+
+class Multi_story_house(House):
+    def __init__(self, length=0, width=0,floors=1):
+        super().__init__(lenght,width)  # call the parent constructor
+        self.floors = floors            # new instance variable for number of floors
+
+    def __str__(self):
+        return f"Multi-story house with length {self.length}, width {self.width}, and {self.floors} floors"
+
+    def total_area(self):       #Calculates total floor area considering all floors
+        return self.area() * self.floors
+
+#17 In a subclass you can add a new definition of a method that in another case would have been inherited from superclass.
+# We call this "override" in OOP (= a method in the subclass overrides the method in the superclass)
+# explain what we used in last code that describes this
+
+#In Multi_story_house class we defined a string method like this:
+def __str__(self):
+    return f"Multi-story house with length {self.length}, width {self.width}, and {self.floors} floors"
+
+#The superclass House already has a __str__ method from before:
+def __str__(self):
+    return f"House with length {self.length} and width {self.width}"
+
+#In Multi_story_house, you defined a new __str__ method,
+#so when you print a Multi_story_house object, Python calls the subclass version instead of the House version.
+#This is method overriding.
+#So Override means a subclass provides its own version of a method that already exists in the superclassand, Python always calls the method of the object’s actual class first.
+#Allows a subclass to customize behavior without changing the superclass.
+
+#18 Dynamic binding in OOP:
+# Construct the class School and let it be a subclass of the class MultistoryBuilding.
+# Let the class School have an instance variable number_of_classrooms that specifies how many classrooms it has.
+# Also add a method that calculates the average number of classrooms per floor.
+# Then create two objects: one of the class MultistoryBuilding and one of the class School.
+# Try setting the width for both objects to 15.
+# Then try reading the number of classrooms for both objects using: getattr(object, "attribute_name", default_value) .What happens?
+
+#Base-class MultistoryBuilding
+class MultistoryBuilding:
+    def __init__(self, length=0, width=0, floors=1):
+        self.length = length
+        self.width = width
+        self.floors = floors
+
+    def __str__:
+        return f"Multistory building with length {self.length}, width {self.width}, and {self.floors}floors"
+
+
+#Sub-class School
+class School(MultistoryBuilding):
+    def __init__(self, length=0, width=0, floors=1,number_of_classrooms=0):
+        super().__init__(length, width, floors)
+        self.number_of_classrooms = number_of_classrooms        # new instance variable
+
+#to calculate Average num of classrooms per floor
+    def average_classrooms_per_floor(self):
+        if self.floors >0:
+            return self.number_of_classrooms/self.floors
+        else:
+            return 0
+
+    def __str__(self):
+        return (f"School with length {self.length}, width {self.width}, "
+                f"{self.floors} floors and {self.number_of_classrooms} classrooms")
+
+#Create objects and test dynamic binding
+building_1 = MultistoryBuilding(length=30, width=0, floors=3)
+school_1 = School(length=40, width=0, floors=4, number_of_classrooms=12)
+
+building_1.width =15  # Set width to 15 for both objects
+school_1.width =15
+
+print (building_1)     # calls MultistoryBuilding.__str__()
+print(school_1)        # calls School.__str__()  -> dynamic binding: uses subclass method
+
+# Try reading number_of_classrooms
+# Python tries to look up the attribute named "attribute_name" in the object.
+# If the attribute exists → it returns the value.
+# If it does not exist → it returns the default_value
+print(getattr(building_1, "number_of_classrooms", "Not defined"))  # Output: Not defined
+print(getattr(school_1, "number_of_classrooms", "Not defined"))  # Output: 12
+
+#Output reflection:
+# Dynamic binding says: Python chooses which method or attribute to use based on the actual type of the object at runtime.
+# Here, school_1 is a School, so Python finds number_of_classrooms in the subclass, even though MultistoryBuilding (the “mother” class) does not have it.
+# building_1 is a MultistoryBuilding, so Python does not find the attribute in the parent class → returns the default.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------
+#19 Extend your class School from Exercise 13.13 with an overriding method area.
+# Let the method calculate the area as the number of classrooms multiplied by 50.
+# Then create a list with one object of type House and one of type School.
+# Initialize the two objects so that they have the same length and width.
+# Also initialize the variable number_of_classrooms in the School object.
+# Then loop through the list and call the method area for the objects it contains.
+# Write down the result and study what happens.
+
+
+#20 A Object Oriented Example: shows the basics of classes, attributes, methods, and object interaction.
+#Create a program that models a simple deck of cards.
+	#1.	Define a class Card with two attributes: suit and value.
+	    #•	Add a method __str__ that returns a text description of the card (e.g., “Ace of Hearts”).
+	#2.	Define a class Deck that contains a list of Card objects.
+	    #•	In the constructor, create a full deck of cards.
+	    #•	Add a method shuffle() to shuffle the deck.
+	    #•	Add a method draw() that removes and returns the top card.
+	#3.	Write a short program that:
+	    #•	Creates a deck,
+	    #•	Shuffles it,
+	    #•	Draws and prints 5 cards.
+
+
+
+
+
+
+
+#BONUS to exercis 20:
+# Change in the main-part of the program so that två human players can play against each other
+
+
+#MORE REPETITION....LASTLY
