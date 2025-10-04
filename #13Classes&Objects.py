@@ -353,9 +353,9 @@ Bankacc.set_interestr(0.05)     # Set class-level interest rate
 acc_1 = Bankacc()               # Create an account
 acc_1.saldo = 1000
 
-acc1.apply_interest()           # Apply interest
-print("Saldo after interest:", acc1.saldo)
-print("Earned interest:", acc1.earned_interest)
+acc_1.apply_interest()           # Apply interest
+print("Saldo after interest:", acc_1.saldo)
+print("Earned interest:", acc_1.earned_interest)
 
 
 #15 Now we move on to Classes describing different kind of Houses.
@@ -366,8 +366,8 @@ print("Earned interest:", acc1.earned_interest)
 
 class House:
     def __init__(self,length=0, width=0):        #constructor for a generic house
-    self.length = length
-    self.width = width
+        self.length = length
+        self.width = width
 
     def __str__(self):
         return f"House with length {self.length} and width {self.width}"
@@ -429,8 +429,8 @@ class MultistoryBuilding:
         self.width = width
         self.floors = floors
 
-    def __str__:
-        return f"Multistory building with length {self.length}, width {self.width}, and {self.floors}floors"
+    def __str__(self):
+        return (f"Multistory building with length {self.length}, width {self.width}, and {self.floors} floors")
 
 
 #Sub-class School
@@ -439,12 +439,18 @@ class School(MultistoryBuilding):
         super().__init__(length, width, floors)
         self.number_of_classrooms = number_of_classrooms        # new instance variable
 
-#to calculate Average num of classrooms per floor
+    # to calculate Average num of classrooms per floor
     def average_classrooms_per_floor(self):
-        if self.floors >0:
-            return self.number_of_classrooms/self.floors
+        if self.floors > 0:
+            return self.number_of_classrooms / self.floors
         else:
             return 0
+    # --- OVERRIDING area() ---
+    #--------------------------------------- exercise 19 extension
+    def area(self):
+        return self.number_of_classrooms*50
+    #--------------------------------------- exercise 19
+
 
     def __str__(self):
         return (f"School with length {self.length}, width {self.width}, "
@@ -473,38 +479,43 @@ print(getattr(school_1, "number_of_classrooms", "Not defined"))  # Output: 12
 # building_1 is a MultistoryBuilding, so Python does not find the attribute in the parent class → returns the default.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
------------------------------------------------
-#19 Extend your class School from Exercise 13.13 with an overriding method area.
+#19 Extend your class School from Exercise 18 with an overriding method area.
 # Let the method calculate the area as the number of classrooms multiplied by 50.
-# Then create a list with one object of type House and one of type School.
 # Initialize the two objects so that they have the same length and width.
 # Also initialize the variable number_of_classrooms in the School object.
+# Then create a list with one object of type House and one of type School.
 # Then loop through the list and call the method area for the objects it contains.
 # Write down the result and study what happens.
+
+#1. Extend the class School by def area(self)
+
+#2. Create objects
+print()
+house_1 = House(length=40,width=15)     #same lenght and width as School
+#we already have:
+print(school_1)
+
+#3. put in a list
+buildings = [house_1,school_1]
+
+print()
+#4. initialize objects to have the same lenght and width. Initialize variable number_of_classrooms in school object, then loop throgh with area
+for i in buildings:
+    print(i)            #we use print so Python looks for a special method in the class called __str__
+    print("Area:", i.area())    #The () at the end of b.area() - are what calls the method.
+    print()
+
+# 5. observation
+# To see the override in action, we can change the School’s number of classrooms so the result is different from the House’s area.
+
+#Even though both objects have the same area result (600), the way it is calculated is completely different.
+# This is method overriding + dynamic binding:
+# Python chooses which version of .area() to call based on the actual object type at runtime.
+# When looping through the list, print(i.area()) calls House.area() for the House, and School.area() for the School.
+
+#That’s exactly what the exercise wanted you to “study”:
+# The same method name (area) behaves differently depending on the object’s class.
+# This is the essence of polymorphism in object-oriented programming.
 
 
 #20 A Object Oriented Example: shows the basics of classes, attributes, methods, and object interaction.
@@ -515,19 +526,42 @@ print(getattr(school_1, "number_of_classrooms", "Not defined"))  # Output: 12
 	    #•	In the constructor, create a full deck of cards.
 	    #•	Add a method shuffle() to shuffle the deck.
 	    #•	Add a method draw() that removes and returns the top card.
-	#3.	Write a short program that:
+	#3.	Then Write a short script that:
 	    #•	Creates a deck,
 	    #•	Shuffles it,
 	    #•	Draws and prints 5 cards.
 
+class Card:
+    def __init__(self,suit,value):      #This is the constructor __init__ WITH parameters bcs the class do not always start same way. It runs automatically when you create a new Card object. **self** refers to the current object (or instance) of the class. It takes two parameters suit and value
+        self.suit = suit                #we store the suit as an instance variable, To keep it around, we stored it inside the object so it can be used later in the program.
+        self.value = value              #we store the value as an instance variable
+    def __str__(self):                  #This special method defines what should be printed when you use print(card)
+        return f"{self.value} of {self.suit}"
 
+import random
+class Deck:                                 #This class will manage a full deck of 52 cards.
+    def __init__(self):                     #__init__ method of the Deck class doesn’t take parameters because The deck always starts the same way: A full standard deck of 52 cards — all combinations of 4 suits × 13 values. So we don’t need to pass in custom data every time we create a deck. Instead, the deck can build itself using known values
+        suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+        values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
+        self.cards = [Card (suit,value) for suit in suits for value in values]      #nested loop to get list of card values. list comprehension to create all combinations of suit and value, resulting in 52 Card objects (13 values × 4 suits), and store them in self.cards.
+    def shuffle(self):                      #method to shuffle current deck
+        random.shuffle(self.cards)
+    def draw(self):
+        if self.cards:                      #If self.cards contains one or more cards, the condition is True, this to check if there are any cards left in the deck.
+            return self.cards.pop()         # Remove and return the top card
+        return None                         #If there are no cards left, return None.
 
+# Main script to use the classes
+deck = Deck()           #We create a new Deck object. This runs __init__ and builds a full deck.
+deck.shuffle()          #automatically passes the object as self, when you call the method on an object
+print ("Your 5 cards:")
+for _ in range(5):               #_ is just a throwaway variable. It means: “I need to loop 5 times, but I don't need the loop index.” "i" usually means “index” or “counter” and suggests you might use it inside the loop.
+    card= deck.draw()            #We call the draw() method and store the result in card
+    if card:                     #We check if we actually got a card (not None)
+        print(card)
+    else:
+        print("Not enough cards left in deck to draw 5 cards!")
 
+#21 TwentyOne 2.0 in TwentyOne.2.0.py
 
-
-
-#BONUS to exercis 20:
-# Change in the main-part of the program so that två human players can play against each other
-
-
-#MORE REPETITION....LASTLY
+#MORE REPETITION from pictures on Phone
